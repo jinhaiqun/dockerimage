@@ -2,4 +2,7 @@ FROM ubuntu:20.04
 ARG DEBIAN_FRONTEND=noninteractive
 RUN cp /etc/apt/sources.list /etc/apt/sources.list.back && \
     #sed -i 's/archive.ubuntu.com/mirrors.ustc.edu.cn/g' /etc/apt/sources.list && \
-    cd /root
+    cd /root && \
+    mkdir -p Software/opencv/ && \
+    cd Software/opencv/ && \
+    mkdir opencv_install-3.1.0
