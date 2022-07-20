@@ -4,9 +4,12 @@ RUN cp /etc/apt/sources.list /etc/apt/sources.list.back && \
     #sed -i 's/archive.ubuntu.com/mirrors.ustc.edu.cn/g' /etc/apt/sources.list && \
     apt-get update && \
     apt-get upgrade -y && \
-    apt-get install -y wget && \
+    apt-get install -y wget unzip && \
     cd /root && \
     mkdir -p Software/opencv/ && \
     cd Software/opencv/ && \
     mkdir opencv_install-3.1.0 && \
-    wget -O opencv-3.1.0.zip https://github.com/Itseez/opencv/archive/3.1.0.zip
+    wget -O opencv-3.1.0.zip https://github.com/Itseez/opencv/archive/3.1.0.zip && \
+    wget -O opencv_contrib-3.1.0.zip https://github.com/Itseez/opencv_contrib/archive/3.1.0.zip && \
+    unzip opencv-3.1.0.zip && rm opencv-3.1.0.zip && \
+    unzip opencv_contrib-3.1.0.zip && rm opencv_contrib-3.1.0.zip
