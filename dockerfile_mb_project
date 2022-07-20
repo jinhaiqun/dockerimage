@@ -13,3 +13,13 @@ RUN cp /etc/apt/sources.list /etc/apt/sources.list.back && \
     apt-get install -y libopencore-amrnb-dev libopencore-amrwb-dev v4l-utils libhdf5-dev && \
     #pip --no-cache-dir install -i https://pypi.tuna.tsinghua.edu.cn/simple opencv-python numpy scipy scikit-learn==0.24.1 Cython protobuf==3.15.0 pillow==8.3.2 xlwt xlrd PyYAML==5.3.1 tqdm
     pip --no-cache-dir install opencv-python numpy scipy scikit-learn==0.24.1 Cython protobuf==3.15.0 pillow==8.3.2 xlwt xlrd PyYAML==5.3.1 tqdm
+    cd /root && \
+    mkdir -p Software/opencv && \
+    cd Software/opencv && \
+    mkdir opencv_install-3.1.0 && \
+    wget -O opencv-3.1.0.zip https://github.com/Itseez/opencv/archive/3.1.0.zip && \
+    wget -O opencv_contrib-3.1.0.zip https://github.com/Itseez/opencv_contrib/archive/3.1.0.zip && \
+    unzip opencv-3.1.0.zip && rm opencv-3.1.0.zip && \
+    unzip opencv_contrib-3.1.0.zip && rm opencv_contrib-3.1.0.zip && \
+    cd opencv-3.1.0 && mkdir build && cd build && \
+    cmake -D OPENCV_EXTRA_MODULES_PATH=../../opencv_contrib-3.1.0/modules -D CMAKE_BUILD_TYPE=RELEASE -D CMAKE_INSTALL_PREFIX=../../opencv_install-3.1.0 -D INSTALL_C_EXAMPLES=OFF -D BUILD_EXAMPLES=ON -D ENABLE_PRECOMPILED_HEADERS=OFF -D WITH_TBB=ON -D WITH_QT=ON -D WITH_OPENGL=ON -D BUILD_opencv_python3=OFF ..
