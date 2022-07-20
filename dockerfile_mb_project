@@ -1,23 +1,49 @@
+# ==================================================================
+# module list
+# ------------------------------------------------------------------
+# ==================================================================
+
 FROM ubuntu:20.04
-ARG DEBIAN_FRONTEND=noninteractive
-RUN cp /etc/apt/sources.list /etc/apt/sources.list.back && \
-    sed -i 's/archive.ubuntu.com/mirrors.ustc.edu.cn/g' /etc/apt/sources.list && \
+ENV LANG C.UTF-8
+RUN APT_INSTALL="apt-get install -y --no-install-recommends" && \
+    PIP_INSTALL="python -m pip --no-cache-dir install --upgrade" && \
+    GIT_CLONE="git clone --depth 10" && \
+
+    rm -rf /var/lib/apt/lists/* \
+           /etc/apt/sources.list.d/cuda.list \
+           /etc/apt/sources.list.d/nvidia-ml.list && \
+#    sed -i 's/archive.ubuntu.com/mirrors.ustc.edu.cn/g' /etc/apt/sources.list && \
     apt-get update && \
-    apt-get upgrade -y && \
-    apt-get install --assume-yes build-essential apt-utils && \
-    apt-get install -y vim git wget tmux curl unzip unrar cmake python3-pip && \
-    apt-get install -y checkinstall pkg-config yasm && \
-    apt-get install -y libjpeg-dev libpng-dev libtiff-dev libavcodec-dev libavformat-dev libswscale-dev libdc1394-22-dev && \
-    apt-get install -y libxine2-dev libv4l-dev qt5-default  libgtk2.0-dev libtbb-dev && \
-    apt-get install -y libatlas-base-dev libvorbis-dev libxvidcore-dev && \
-    apt-get install -y libopencore-amrnb-dev libopencore-amrwb-dev v4l-utils libhdf5-dev && \
-    pip --no-cache-dir install -i https://pypi.tuna.tsinghua.edu.cn/simple opencv-python numpy scipy scikit-learn==0.24.1 Cython protobuf==3.15.0 pillow==8.3.2 xlwt xlrd PyYAML==5.3.1 tqdm && \
-    cd /root && \
-    mkdir -p Software/opencv/ && \
-    cd Software/opencv/ && \
-    mkdir opencv_install-3.1.0
-    wget -O opencv-3.1.0.zip https://github.com/Itseez/opencv/archive/3.1.0.zip && \
-    wget -O opencv_contrib-3.1.0.zip https://github.com/Itseez/opencv_contrib/archive/3.1.0.zip && \
-    unzip opencv-3.1.0.zip && rm opencv-3.1.0.zip && \
-    unzip opencv_contrib-3.1.0.zip && rm opencv_contrib-3.1.0.zip
-    
+
+# ==================================================================
+# tools
+# ------------------------------------------------------------------
+
+    DEBIAN_FRONTEND=noninteractive $APT_INSTALL \
+        build-essential \
+        apt-utils \
+        ca-certificates \
+        wget \
+        git \
+        vim \
+        openssh-client \
+        openssh-server \
+        htop \
+        tmux \
+        libssl-dev \
+        curl \
+        unzip \
+        unrar \
+        cmake \
+        && \
+
+
+
+# ==================================================================
+# config & cleanup
+# ------------------------------------------------------------------
+ 
+    ldconfig && \
+    apt-get clean && \
+    apt-get autoremove && \
+    rm -rf /var/lib/apt/lists/* /tmp/* ~/*
