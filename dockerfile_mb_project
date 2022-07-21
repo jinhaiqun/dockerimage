@@ -1,16 +1,15 @@
 FROM ubuntu:20.04
-ARG DEBIAN_FRONTEND=noninteractive
 RUN cp /etc/apt/sources.list /etc/apt/sources.list.back && \
     #sed -i 's/archive.ubuntu.com/mirrors.ustc.edu.cn/g' /etc/apt/sources.list && \
     apt-get update && \
     apt-get upgrade -y && \
-    apt-get install --assume-yes build-essential apt-utils && \
-    apt-get install -y vim git wget tmux curl unzip unrar cmake python3-pip && \
-    apt-get install -y checkinstall pkg-config yasm && \
-    apt-get install -y libjpeg-dev libpng-dev libtiff-dev libavcodec-dev libavformat-dev libswscale-dev libdc1394-22-dev && \
-    apt-get install -y libxine2-dev libv4l-dev qt5-default  libgtk2.0-dev libtbb-dev && \
-    apt-get install -y libatlas-base-dev libvorbis-dev libxvidcore-dev && \
-    apt-get install -y libopencore-amrnb-dev libopencore-amrwb-dev v4l-utils libhdf5-dev && \
+    DEBIAN_FRONTEND=noninteractive apt-get install -y build-essential apt-utils \
+        vim git wget tmux curl unzip unrar cmake python3-pip \
+        checkinstall pkg-config yasm \
+        libjpeg-dev libpng-dev libtiff-dev libavcodec-dev libavformat-dev libswscale-dev libdc1394-22-dev \
+        libxine2-dev libv4l-dev qt5-default  libgtk2.0-dev libtbb-dev \
+        libatlas-base-dev libvorbis-dev libxvidcore-dev \
+        libopencore-amrnb-dev libopencore-amrwb-dev v4l-utils libhdf5-dev && \
     #pip --no-cache-dir install -i https://pypi.tuna.tsinghua.edu.cn/simple opencv-python numpy scipy scikit-learn==0.24.1 Cython protobuf==3.15.0 pillow==8.3.2 xlwt xlrd PyYAML==5.3.1 tqdm && \
     pip --no-cache-dir install opencv-python numpy scipy scikit-learn==0.24.1 Cython protobuf==3.15.0 pillow==8.3.2 xlwt xlrd PyYAML==5.3.1 tqdm && \
     #===== opencv =====#
@@ -18,11 +17,12 @@ RUN cp /etc/apt/sources.list /etc/apt/sources.list.back && \
     mkdir -p Software/opencv/ && \
     cd Software/opencv/ && \
     mkdir opencv_install-3.1.0 && \
-    wget -O opencv-3.1.0.zip https://github.com/Itseez/opencv/archive/3.1.0.zip && \
-    wget -O opencv_contrib-3.1.0.zip https://github.com/Itseez/opencv_contrib/archive/3.1.0.zip && \
-    unzip opencv-3.1.0.zip && rm opencv-3.1.0.zip && \
-    unzip opencv_contrib-3.1.0.zip && rm opencv_contrib-3.1.0.zip && \
-    cd opencv-3.1.0 && mkdir build && cd build && \
+    mkdir tmp && cd tmp && \
+    git clone https://github.com/jinhaiqun/opencv-3.1.0.git && \
+    mv opencv-3.1.0/* ../opencv/ && \
+    cd .. && \
+    rm -rf tmp && \
+    cd opencv/opencv-3.1.0 && mkdir build && cd build && \
     cmake -D OPENCV_EXTRA_MODULES_PATH=../../opencv_contrib-3.1.0/modules -D CMAKE_BUILD_TYPE=RELEASE -D CMAKE_INSTALL_PREFIX=../../opencv_install-3.1.0 -D INSTALL_C_EXAMPLES=OFF -D BUILD_EXAMPLES=ON -D ENABLE_PRECOMPILED_HEADERS=OFF -D WITH_TBB=ON -D WITH_QT=ON -D WITH_OPENGL=ON -D BUILD_opencv_python3=OFF .. && \
     make -j8 && \
     make install && \
