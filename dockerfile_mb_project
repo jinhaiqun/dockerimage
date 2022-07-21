@@ -38,7 +38,7 @@ RUN cp /etc/apt/sources.list /etc/apt/sources.list.back && \
     cd /root && \
     mkdir Projects && cd Projects && \
     git clone https://github.com/jinhaiqun/mb_project.git && \
-    cd mb_project/3rd/cd rh_img_access_layer && \
+    cd mb_project/3rd/rh_img_access_layer && \
     pip --no-cache-dir install -e . && \
     cd ../gcsfs && \
     pip --no-cache-dir install -e . && \
