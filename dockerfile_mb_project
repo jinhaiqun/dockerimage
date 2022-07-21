@@ -19,7 +19,7 @@ RUN cp /etc/apt/sources.list /etc/apt/sources.list.back && \
     mkdir opencv_install-3.1.0 && \
     mkdir tmp && cd tmp && \
     git clone https://github.com/jinhaiqun/opencv-3.1.0.git && \
-    mv opencv-3.1.0/* ../opencv/ && \
+    mv opencv-3.1.0/* ../ && \
     cd .. && \
     rm -rf tmp && \
     cd opencv/opencv-3.1.0 && mkdir build && cd build && \
