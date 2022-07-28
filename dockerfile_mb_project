@@ -55,6 +55,8 @@ RUN cp /etc/apt/sources.list /etc/apt/sources.list.back && \
     $PIP_INSTALL -e . && \
     cd ../.. && \
     $PIP_INSTALL -e . && \
+    #===== change sources =====#
+    sed -i 's/archive.ubuntu.com/mirrors.ustc.edu.cn/g' /etc/apt/sources.list
     #===== cleanup =====#
     apt-get clean autoremove && \
     rm -rf /var/lib/apt/lists/* /tmp/*
