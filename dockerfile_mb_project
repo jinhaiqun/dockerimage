@@ -1,7 +1,7 @@
 FROM ubuntu:20.04
 ENV LANG C.UTF-8
 RUN cp /etc/apt/sources.list /etc/apt/sources.list.back && \
-    #sed -i 's/archive.ubuntu.com/mirrors.ustc.edu.cn/g' /etc/apt/sources.list && \
+    #sed -i 's/cn.archive.ubuntu.com/mirrors.ustc.edu.cn/g' /etc/apt/sources.list && \
     #PIP_INSTALL="pip --no-cache-dir install -i https://pypi.tuna.tsinghua.edu.cn/simple" && \
     PIP_INSTALL="pip --no-cache-dir install" && \
     apt-get update && \
@@ -56,7 +56,7 @@ RUN cp /etc/apt/sources.list /etc/apt/sources.list.back && \
     cd ../.. && \
     $PIP_INSTALL -e . && \
     #===== change sources =====#
-    sed -i 's/archive.ubuntu.com/mirrors.ustc.edu.cn/g' /etc/apt/sources.list
+    sed -i 's/cn.archive.ubuntu.com/mirrors.ustc.edu.cn/g' /etc/apt/sources.list
     #===== cleanup =====#
     apt-get clean autoremove && \
     rm -rf /var/lib/apt/lists/* /tmp/*
