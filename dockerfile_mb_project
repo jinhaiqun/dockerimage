@@ -59,4 +59,4 @@ RUN cp /etc/apt/sources.list /etc/apt/sources.list.back && \
     apt-get clean autoremove && \
     rm -rf /var/lib/apt/lists/* /tmp/*
     #===== change sources =====#
-    sed -i 's/archive.ubuntu.com/mirrors.ustc.edu.cn/g' /etc/apt/sources.list
+    #sed -i 's/archive.ubuntu.com/mirrors.ustc.edu.cn/g' /etc/apt/sources.list
