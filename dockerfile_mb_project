@@ -5,8 +5,8 @@ RUN cp /etc/apt/sources.list /etc/apt/sources.list.back && \
     #PIP_INSTALL="pip --no-cache-dir install -i https://pypi.tuna.tsinghua.edu.cn/simple" && \
     PIP_INSTALL="pip --no-cache-dir install" && \
     apt-get update && \
-    apt-get upgrade -y
-    #DEBIAN_FRONTEND=noninteractive apt-get install -y build-essential apt-utils \
+    apt-get upgrade -y && \
+    DEBIAN_FRONTEND=noninteractive apt-get install -y build-essential apt-utils
     #    vim git wget tmux curl htop unzip unrar cmake python3-pip ca-certificates openssh-client openssh-server libssl-dev \
     #    checkinstall pkg-config yasm \
     #    libjpeg-dev libpng-dev libtiff-dev libavcodec-dev libavformat-dev libswscale-dev libdc1394-22-dev \
