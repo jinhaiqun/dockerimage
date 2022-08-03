@@ -14,47 +14,47 @@ RUN cp /etc/apt/sources.list /etc/apt/sources.list.back && \
         libatlas-base-dev libvorbis-dev libxvidcore-dev \
         libopencore-amrnb-dev libopencore-amrwb-dev v4l-utils libhdf5-dev && \    
     #===== opencv =====#
-    cd /root && \
-    echo "set nu" > .vimrc && \
-    mkdir -p Software/opencv/ && \
-    cd Software/opencv/ && \
-    mkdir opencv_install-3.1.0 && \
-    mkdir tmp && cd tmp && \
-    git clone https://github.com/jinhaiqun/opencv-3.1.0.git && \
-    mv opencv-3.1.0/* ../ && \
-    cd .. && \
-    rm -rf tmp && \
-    cd opencv-3.1.0 && mkdir build && cd build && \
-    cmake -D OPENCV_EXTRA_MODULES_PATH=../../opencv_contrib-3.1.0/modules -D CMAKE_BUILD_TYPE=RELEASE -D CMAKE_INSTALL_PREFIX=../../opencv_install-3.1.0 -D INSTALL_C_EXAMPLES=OFF -D BUILD_EXAMPLES=ON -D ENABLE_PRECOMPILED_HEADERS=OFF -D WITH_TBB=ON -D WITH_QT=ON -D WITH_OPENGL=ON -D BUILD_opencv_python3=OFF .. && \
-    make -j8 && \
-    make install && \
-    cd ../3rdparty/ippicv/downloads/linux-808b791a6eac9ed78d32a7666804320e/ && \
-    tar -zxvf ippicv_linux_20151201.tgz && \
-    cp ippicv_lnx/lib/intel64/libippicv.a /usr/local/lib && \
-    rm -rf ippicv_lnx && \
-    cd ../../../../.. && \
-    cp opencv_install-3.1.0/lib/pkgconfig/opencv.pc /usr/lib/pkgconfig/ && \
-    echo "/root/Software/opencv/opencv_install-3.1.0/lib" > /etc/ld.so.conf.d/opencv.conf && \
-    ldconfig && \
-    #===== mb_project =====#
-    cd /root && \
-    mkdir Projects && cd Projects && \
-    git clone https://github.com/jinhaiqun/mb_project.git && \
-    cd mb_project/3rd/rh_img_access_layer && \
-    $PIP_INSTALL opencv-python numpy scipy scikit-learn==0.24.1 Cython protobuf==3.15.0 pillow==8.3.2 xlwt xlrd PyYAML==5.3.1 tqdm && \
-    $PIP_INSTALL -e . && \
-    cd ../gcsfs && \
-    $PIP_INSTALL -e . && \
-    cd ../tinyr && \
-    $PIP_INSTALL -e . && \
-    cd ../rh_config && \
-    $PIP_INSTALL -e . && \
-    cd ../rh_logger && \
-    $PIP_INSTALL -e . && \
-    cd ../rh_renderer && \
-    $PIP_INSTALL -e . && \
-    cd ../.. && \
-    $PIP_INSTALL -e . && \
-    #===== cleanup =====#
-    apt-get clean autoremove && \
-    rm -rf /var/lib/apt/lists/* /tmp/*
+    #cd /root && \
+    #echo "set nu" > .vimrc && \
+    #mkdir -p Software/opencv/ && \
+    #cd Software/opencv/ && \
+    #mkdir opencv_install-3.1.0 && \
+    #mkdir tmp && cd tmp && \
+    #git clone https://github.com/jinhaiqun/opencv-3.1.0.git && \
+    #mv opencv-3.1.0/* ../ && \
+    #cd .. && \
+    #rm -rf tmp && \
+    #cd opencv-3.1.0 && mkdir build && cd build && \
+    #cmake -D OPENCV_EXTRA_MODULES_PATH=../../opencv_contrib-3.1.0/modules -D CMAKE_BUILD_TYPE=RELEASE -D CMAKE_INSTALL_PREFIX=../../opencv_install-3.1.0 -D INSTALL_C_EXAMPLES=OFF -D BUILD_EXAMPLES=ON -D ENABLE_PRECOMPILED_HEADERS=OFF -D WITH_TBB=ON -D WITH_QT=ON -D WITH_OPENGL=ON -D BUILD_opencv_python3=OFF .. && \
+    #make -j8 && \
+    #make install && \
+    #cd ../3rdparty/ippicv/downloads/linux-808b791a6eac9ed78d32a7666804320e/ && \
+    #tar -zxvf ippicv_linux_20151201.tgz && \
+    #cp ippicv_lnx/lib/intel64/libippicv.a /usr/local/lib && \
+    #rm -rf ippicv_lnx && \
+    #cd ../../../../.. && \
+    #cp opencv_install-3.1.0/lib/pkgconfig/opencv.pc /usr/lib/pkgconfig/ && \
+    #echo "/root/Software/opencv/opencv_install-3.1.0/lib" > /etc/ld.so.conf.d/opencv.conf && \
+    #ldconfig && \
+    ##===== mb_project =====#
+    #cd /root && \
+    #mkdir Projects && cd Projects && \
+    #git clone https://github.com/jinhaiqun/mb_project.git && \
+    #cd mb_project/3rd/rh_img_access_layer && \
+    #$PIP_INSTALL opencv-python numpy scipy scikit-learn==0.24.1 Cython protobuf==3.15.0 pillow==8.3.2 xlwt xlrd PyYAML==5.3.1 tqdm && \
+    #$PIP_INSTALL -e . && \
+    #cd ../gcsfs && \
+    #$PIP_INSTALL -e . && \
+    #cd ../tinyr && \
+    #$PIP_INSTALL -e . && \
+    #cd ../rh_config && \
+    #$PIP_INSTALL -e . && \
+    #cd ../rh_logger && \
+    #$PIP_INSTALL -e . && \
+    #cd ../rh_renderer && \
+    #$PIP_INSTALL -e . && \
+    #cd ../.. && \
+    #$PIP_INSTALL -e . && \
+    ##===== cleanup =====#
+    #apt-get clean autoremove && \
+    #rm -rf /var/lib/apt/lists/* /tmp/*
