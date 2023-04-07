@@ -54,6 +54,7 @@ RUN cp /etc/apt/sources.list /etc/apt/sources.list.back && \
     cd ../rh_renderer && \
     $PIP_INSTALL -e . && \
     cd ../.. && \
+    # 假如docker只安装环境，不包括代码的话，这一步可以不执行，mb_project的代码可以不上传，即3rd的部分可以在环境中搭好，其他代码不放入环境(所以上述创建的文件夹mb_project可以自己随便指定)
     $PIP_INSTALL -e . && \
     #===== cleanup =====#
     apt-get clean autoremove && \
