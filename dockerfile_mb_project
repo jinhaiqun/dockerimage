@@ -41,7 +41,7 @@ RUN cp /etc/apt/sources.list /etc/apt/sources.list.back && \
     mkdir Projects && cd Projects && \
     git clone https://github.com/jinhaiqun/mb_project.git && \
     cd mb_project/3rd/rh_img_access_layer && \
-    $PIP_INSTALL opencv-python numpy scipy scikit-learn==0.24.1 Cython protobuf==3.15.0 pillow==8.3.2 xlwt xlrd PyYAML==5.3.1 tqdm && \
+    $PIP_INSTALL opencv-python numpy==1.23.1 scipy==1.9.1 scikit-learn==0.24.1 Cython protobuf==3.19.6 pillow==8.3.2 xlwt xlrd PyYAML==5.3.1 tqdm ujson lru-dict==1.1.8 && \
     $PIP_INSTALL -e . && \
     cd ../gcsfs && \
     $PIP_INSTALL -e . && \
